@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMG Software - Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #282c34;
+            color: white;
+        }
+        .login-container {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 8px;
+            background: #444;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        input {
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            width: 100%;
+        }
+        button {
+            padding: 0.7rem;
+            width: 100%;
+            background: #61dafb;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #21a1f1;
+        }
+        #error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>LMG Software</h1>
+        <form id="loginForm">
+            <label for="username">Benutzername:</label>
+            <input type="text" id="username" required>
+            <label for="password">Passwort:</label>
+            <input type="password" id="password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p id="error-message"></p>
+    </div>
+    <script>
+        const users = {
+            'guest': { password: 'guest123', role: 'Gast' },
+            'employee': { password: 'emp456', role: 'Mitarbeiter' },
+            'manager': { password: 'mgr789', role: 'Manager' },
+            'ceo': { password: 'boss101', role: 'CEO' }
+        };
+
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const user = users[username];
+
+            if (user && user.password === password) {
+                window.location.href = `dashboard.html?user=${username}&role=${user.role}`;
+            } else {
+                document.getElementById('error-message').textContent = 'Ungültiger Benutzername oder Passwort.';
+            }
+        });
+    </script>
+</body>
+</html>
