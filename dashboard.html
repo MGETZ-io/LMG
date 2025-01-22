@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMG Software - Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 2rem;
+        }
+        .widget {
+            display: inline-block;
+            width: 200px;
+            height: 150px;
+            margin: 1rem;
+            padding: 1rem;
+            text-align: center;
+            background: #61dafb;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .widget:hover {
+            transform: scale(1.05);
+        }
+        .welcome {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="dashboard">
+        <h1>LMG Software Dashboard</h1>
+        <p class="welcome" id="welcomeMessage"></p>
+        <div class="widget">Widget 1</div>
+        <div class="widget">Widget 2</div>
+        <div class="widget">Widget 3</div>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const user = urlParams.get('user');
+        const role = urlParams.get('role');
+
+        if (user && role) {
+            document.getElementById('welcomeMessage').textContent = `Willkommen, ${user} (${role})`;
+        } else {
+            document.getElementById('welcomeMessage').textContent = 'Unbekannter Benutzer';
+        }
+    </script>
+</body>
+</html>
