@@ -6,55 +6,90 @@
     <title>LMG Software - Dashboard</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 2rem;
+            padding: 0;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            color: white;
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
         }
-        h1, .widget {
-            margin-bottom: 1rem;
+        h1 {
+            margin-top: 1rem;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
         }
         .welcome {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        .widget-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+            width: 80%;
+            padding: 1rem;
         }
         .widget {
-            width: 200px;
-            height: 150px;
-            display: inline-block;
-            margin: 0.5rem;
+            position: relative;
             padding: 1rem;
-            background: rgba(97, 218, 251, 0.8); /* Transparenz */
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, background 0.3s;
+            transition: transform 0.5s, box-shadow 0.5s, background 0.5s;
         }
         .widget:hover {
-            transform: scale(1.05);
-            background: rgba(33, 161, 241, 0.9); /* leicht dunkler bei Hover */
+            transform: translateY(-10px);
+            box-shadow: 0 12px 36px rgba(0, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .widget::after {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 15px;
+            pointer-events: none;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
         }
         #logout {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            padding: 0.5rem 1rem;
-            background: red;
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            padding: 0.7rem 1.5rem;
+            background: rgba(255, 69, 58, 0.8);
             color: white;
             border: none;
+            border-radius: 6px;
             cursor: pointer;
-            border-radius: 4px;
+            transition: background 0.3s;
         }
         #logout:hover {
-            background: darkred;
+            background: rgba(255, 69, 58, 1);
         }
         #logo {
-            position: absolute;
+            position: fixed;
             bottom: 10px;
             right: 10px;
-            width: 100px;
+            width: 80px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        #logo:hover {
+            opacity: 1;
         }
     </style>
 </head>
@@ -62,10 +97,12 @@
     <h1>LMG Software Dashboard</h1>
     <p class="welcome" id="welcomeMessage"></p>
 
-    <a href="calendar.html" class="widget">Kalender</a>
-    <a href="personenmanagement.html" class="widget">Personenmanagement</a>
-    <a href="geraeteverwaltung.html" class="widget">Geräteverwaltung</a>
-    <a href="ceo-funktionen.html" id="widget4" class="widget">CEO-Funktionen</a>
+    <div class="widget-container">
+        <a href="calendar.html" class="widget">Kalender</a>
+        <a href="personenmanagement.html" class="widget">Personenmanagement</a>
+        <a href="geraeteverwaltung.html" class="widget">Geräteverwaltung</a>
+        <a href="ceo-funktionen.html" id="widget4" class="widget">CEO-Funktionen</a>
+    </div>
 
     <button id="logout">Logout</button>
     <img id="logo" src="LMG.jpg" alt="LMG Logo">
@@ -78,7 +115,7 @@
         if (user && role) {
             document.getElementById('welcomeMessage').textContent = `Willkommen, ${user} (${role})`;
             if (role !== 'CEO') {
-                document.getElementById('widget4').style.display = 'none'; // CEO-Widget verstecken
+                document.getElementById('widget4').style.display = 'none';
             }
         } else {
             document.getElementById('welcomeMessage').textContent = 'Unbekannter Benutzer';
