@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LMG Software - Dashboard</title>
+    <title>LMG Group Dashboard</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -91,10 +91,25 @@
         #logo:hover {
             opacity: 1;
         }
+        #demo-mode {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            padding: 0.7rem 1.5rem;
+            background: rgba(0, 123, 255, 0.8);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        #demo-mode:hover {
+            background: rgba(0, 123, 255, 1);
+        }
     </style>
 </head>
 <body>
-    <h1>LMG Software Dashboard</h1>
+    <h1>LMG Group Dashboard</h1>
     <p class="welcome" id="welcomeMessage"></p>
 
     <div class="widget-container">
@@ -105,6 +120,7 @@
     </div>
 
     <button id="logout">Logout</button>
+    <button id="demo-mode">Demo-Modus</button>
     <img id="logo" src="LMG.jpg" alt="LMG Logo">
 
     <script>
@@ -123,6 +139,10 @@
 
         document.getElementById('logout').addEventListener('click', () => {
             window.location.href = 'index.html';
+        });
+
+        document.getElementById('demo-mode').addEventListener('click', () => {
+            window.location.href = 'demo-modus.html';
         });
     </script>
 </body>
