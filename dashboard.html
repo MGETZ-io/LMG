@@ -26,14 +26,15 @@
             display: inline-block;
             margin: 0.5rem;
             padding: 1rem;
-            background: #61dafb;
+            background: rgba(97, 218, 251, 0.8); /* Transparenz */
             border-radius: 8px;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+            transition: transform 0.3s, background 0.3s;
         }
         .widget:hover {
             transform: scale(1.05);
+            background: rgba(33, 161, 241, 0.9); /* leicht dunkler bei Hover */
         }
         #logout {
             position: absolute;
@@ -61,10 +62,10 @@
     <h1>LMG Software Dashboard</h1>
     <p class="welcome" id="welcomeMessage"></p>
 
-    <div class="widget" id="widget1">Kalender</div>
-    <div class="widget" id="widget2">Personenmanagement</div>
-    <div class="widget" id="widget3">Geräteverwaltung</div>
-    <div class="widget" id="widget4">CEO-Funktionen</div>
+    <a href="calendar.html" class="widget">Kalender</a>
+    <a href="personenmanagement.html" class="widget">Personenmanagement</a>
+    <a href="geraeteverwaltung.html" class="widget">Geräteverwaltung</a>
+    <a href="ceo-funktionen.html" id="widget4" class="widget">CEO-Funktionen</a>
 
     <button id="logout">Logout</button>
     <img id="logo" src="LMG.jpg" alt="LMG Logo">
@@ -73,7 +74,6 @@
         const urlParams = new URLSearchParams(window.location.search);
         const user = urlParams.get('user');
         const role = urlParams.get('role');
-        const widgets = document.querySelectorAll('.widget');
 
         if (user && role) {
             document.getElementById('welcomeMessage').textContent = `Willkommen, ${user} (${role})`;
@@ -83,10 +83,6 @@
         } else {
             document.getElementById('welcomeMessage').textContent = 'Unbekannter Benutzer';
         }
-
-        widgets.forEach((widget, index) => {
-            widget.addEventListener('click', () => alert(`Funktion für Widget ${index + 1} wird geladen...`));
-        });
 
         document.getElementById('logout').addEventListener('click', () => {
             window.location.href = 'index.html';
